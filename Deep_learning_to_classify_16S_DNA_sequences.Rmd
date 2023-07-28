@@ -90,7 +90,7 @@ Each sequence contains hierarchical taxonomic information as described above. Ho
 \vspace{0.5cm}
 
 ```{r classcounts, echo=FALSE}
-df <-read.table("~/cluster/data/users/mkreuzer/CNN_16S_classification/convolutional_classifier/report_files/class_counts_bacteria.tsv",
+df <-read.table("~/cluster/data/users/mkreuzer/CNN_16S_classification/report_files/class_counts_bacteria.tsv",
                 header=T)
 df <- df %>% 
   separate(level, into = c("taxonomic_level", "min_samples", "fraction"), sep = "_") %>% 
@@ -287,9 +287,69 @@ knitr::include_graphics("data_engineering/dataset_statistics/Phylum_Actinobacter
 
 The second dataset used in this study contains 80% of the Domain Bacteria, which corresponds to 80% of the whole alignment. The minimum number of samples per group was set to 8 or 10 and the classificaton level was species. This dataset resulted in 4079 classes.
 
-## Convolutional Classifier
+# Convolutional Classifier
 
+## Models
 
+The first deep learning method applied consists of a convolutional classifier,
+where four different models were tested. The models have similar structures, consisting of a combination of convolutional layers, max-pooling layers, and fully connected networks. They differ mainly in the number of layers, number of neurons in the FCN, and use of techniques such as dropout to avoid overfitting. The complexity and expressiveness of the models increase from SmallModel to LargerModel. The Kaiming He initialization was employed to initialize the layers in the models.
+
+1. SmallModel (trainable parameteres: ~1.7 M): This model utilizes two convolutional layers and two max-pooling layers, followed by a three-layer fully connected network (FCN). The network starts with 6 input channels and gradually reduces down to 8 channels after the convolutional layers. Then, a FCN consisting of 256, 128, and num_classes neurons follows. The convolutional layers have relatively high strides (3 and 5) which might result in loss of spatial information.
+
+2. ConvClassifier2 (trainable parameters: ~8.4 M): This model introduces more depth with six convolutional layers and four max-pooling layers. The number of channels increases from 6 to 32, and then gradually decreases to 4. The classifier uses an FCN with a higher number of neurons than the SmallModel. Unlike SmallModel, it uses smaller strides in its convolutional layers, which could potentially capture more fine-grained patterns in the input data.
+
+3. ModelWithDropout (trainable parameters: ~8.4 M): This model is identical to ConvClassifier2 in terms of architecture but introduces dropout in the FCN. Dropout helps to prevent overfitting by randomly setting a fraction of input units to 0 during training, which helps to improve the model's generalization capability.
+
+4. LargerModel (trainable parameters: ~27.5 M): This model expands on the ConvClassifier2 and ModelWithDropout with an increased number of channels in the convolutional layers, going up to 64 channels. The FCN is also larger, potentially making this model more expressive at the cost of increased computational complexity and risk of overfitting.
+
+## Training
+
+The training was performed using a grid search over specified hyperparameters. The hyperparameters were stored in the configuration file `config.yaml`:
+
+```{yaml, eval=FALSE}
+# Data specifications
+data_folder: "/scratch/mk_cas/full_silva_dataset/sequences/"
+alignment_length: 50000
+
+# Taxonomy parameters
+taxonomic_level: "Phylum"
+taxonomic_group: "Actinobacteria"
+classification_level: "Genus"
+minimum_samples_per_group: 20
+fraction_of_sequences_to_use: 0.2
+
+# Hyperparameters
+lr: [0.001, 0.0001, 0.00001]
+n_epoch: [50]
+batch_size: [128, 64, 32]
+model: [ConvClassifier2, SmallModel, ModelWithDropout, LargerModel]
+```
+
+The data was prepared by loading and filtering labels based on a taxonomic filter specified in the configuration. The labels were then encoded, and the data was split into training, validation, and testing sets using the respective indices.
+Importantly, the data was split using the `StratifiedShuffleSplit` function in
+order to keep the classes proportionally represented.
+
+For each parameter combination various auxiliary data such as the classification counts, label map, and the indices of the training, validation, and testing sets were saved. The Adam optimizer was used, with the learning rate specified by the current parameter set. Finally, the trained model's weights were saved.
+
+The model was then switched to evaluation mode, and performance was assessed on the validation set, with both the true and predicted labels stored for later evaluation.  Various evaluation metrics (like confusion matrix, training-validation loss curves, and F1 score) were computed and saved.
+
+## Results
+
+```{r}
+dat <- read.csv("~/cluster/data/users/mkreuzer/CNN_16S_classification/convolutional_classifier/results/f1_scores_actinobacteria_genus.csv", header = F)
+names(dat) = c("classification", "f1")
+
+fields <- c("tax_group","classification_level","tmp", "min_seqs", 
+            "model", "tmp2", "batch_size", "tmp3", "learning_rate",
+            "tmp4", "number_of_epochs")
+
+dat %>% 
+  separate(classification,into = fields, sep = "_") %>% 
+  select(!contains("tmp")) %>% 
+  ggplot(aes(x=batch_size,y=learning_rate)) +
+  geom_tile(aes(fill=f1)) +
+  facet_wrap(~model)
+```
 
 
 
