@@ -43,6 +43,7 @@ class RetrieveSequenceInfo:
         print("Tensor:", tensor_data["sequence_tensor"])
         print("Full label:", full_label)
         print("Original FASTA header:", original_header)
+        print(tensor_data)
         
 def main(sequence_id, sequence_path='/scratch/mk_cas/datasets2/sequences', msa_file_path='../../data/Actinobacteria_10000_seqs.fasta'):
     """

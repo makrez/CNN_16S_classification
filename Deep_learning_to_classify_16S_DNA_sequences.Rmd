@@ -11,12 +11,13 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(kableExtra)
 library(cowplot)
+library(knitr)
 ```
 
 # Introduction
 
 
-Rapid advancements in genomic sequencing techniques have resulted in an exponential increase in the availability of biological sequence data, specifically 16S ribosomal DNA (rRNA) sequences. The 16S rRNA sequences, universally present in bacteria and archaea, are used as a fundamental tool for microbial ecology studies, including identification, classification, and phylogenetic analysis. However, the massive influx of 16S rRNA sequences demands more efficient and accurate computational tools for analysis, interpretation, and understanding.
+Rapid advancements in genomic sequencing techniques have resulted in an exponential increase in the availability of biological sequence data such as the 16S ribosomal DNA (rRNA) sequences. The 16S rRNA sequences, universally present in bacteria and archaea, are used as a fundamental tool for microbial ecology studies, including identification, classification, and phylogenetic analysis. However, the massive influx of 16S rRNA sequences demands more efficient and accurate computational tools for analysis, interpretation, and understanding.
 
 Traditional analysis methods, such as alignment-based techniques, may become computationally expensive and potentially less accurate as the sequence data size increases. Recent years have witnessed the rise of machine learning, and more specifically, deep learning techniques, which have been successfully applied in various fields, including image recognition, natural language processing, and genomics. The key advantage of deep learning is its ability to learn complex patterns in high-dimensional data, thus making it an attractive option for 16S rDNA sequence analysis.
 
@@ -89,7 +90,7 @@ Each sequence contains hierarchical taxonomic information as described above. Ho
 \vspace{0.5cm}
 
 ```{r classcounts, echo=FALSE}
-df <-read.table("~/cluster/data/users/mkreuzer/classification_NN_16S/convolutional_classifier/report_files/class_counts_bacteria.tsv",
+df <-read.table("~/cluster/data/users/mkreuzer/CNN_16S_classification/convolutional_classifier/report_files/class_counts_bacteria.tsv",
                 header=T)
 df <- df %>% 
   separate(level, into = c("taxonomic_level", "min_samples", "fraction"), sep = "_") %>% 
@@ -138,7 +139,7 @@ make_classhistograms <- function(csv){
     axis.title.y = element_blank()
   )
 }
-base_path <- "~/cluster/data/users/mkreuzer/classification_NN_16S/convolutional_classifier/convolutional_classifier/data_descriptions/"
+base_path <- "~/cluster/data/users/mkreuzer/CNN_16S_classification/data_engineering/dataset_statistics/data_descriptions/"
 
 g1 <- make_classhistograms(file.path(base_path, "Domain_Bacteria_Kingdom_20_1.csv"))
 g2 <- make_classhistograms(file.path(base_path, "Domain_Bacteria_Phylum_20_1.csv"))
@@ -161,26 +162,28 @@ DNA sequences are represented as strings of nucleotides (A,T,C,G). In the contex
 of deep learning, this representation has to be one-hot encoded. Furthermore,
 gaps were treated as follows: If the gap is larger than four consecutive positions, the positions
 were encoded as `N` (missing data), otherwise the data was encoded as `-`. Therefore, 
-a nucleotide can be encoded into six values (e.g. `[0,1,0,0,0,0]`)
+a nucleotide can be encoded into six values (e.g. `[0,1,0,0,0,0]`).
 
 This task has been achieved with the custom python class `hot_dna`. To instantiate
 the class, a DNA sequence and the taxonomic description as described above have to be supplied.
 The methods of `hot_dna` can be used to encode and decode a one-hot encoded DNA sequence.
 
 ```{python ,eval=F}
-
 class hot_dna:
     ### Class for One Hot Encoding DNA sequences
     def __init__(self, sequence, taxonomy):
         sequence = sequence.upper()
         self.sequence = self._preprocess_sequence(sequence)
-        self.category_mapping = {'A': 0, 'C': 1, 'G': 2, 'T': 3, 'U': 3, '-': 4, 'N': 5}
+        self.category_mapping = {'A': 0, 'C': 1, 'G': 2, 'T': 3, 'U': 3, 
+                                 '-': 4, 'N': 5}
         if sequence:
             self.onehot = self._onehot_encode(self.sequence)
-        self.taxonomy = taxonomy.split(';')  # splitting by ';' to get each taxonomy level
+        # splitting by ';' to get each taxonomy level
+        self.taxonomy = taxonomy.split(';') 
 
     def _preprocess_sequence(self, sequence):
-        ambiguous_bases = {'R', 'Y', 'S', 'W', 'K', 'M', 'B', 'D', 'H', 'V', '.',}
+        ambiguous_bases = {'R', 'Y', 'S', 'W', 'K', 'M', 'B', 
+                           'D', 'H', 'V', '.',}
         new_sequence = ""
         for base in sequence:
             if base in ambiguous_bases:
@@ -188,12 +191,14 @@ class hot_dna:
             else:
                 new_sequence += base
         # replace sequences of four or more '-' characters with 'N' characters
-        new_sequence = re.sub('(-{4,})', lambda m: 'N' * len(m.group(1)), new_sequence)
+        new_sequence = re.sub('(-{4,})', lambda m: 'N' * len(m.group(1)), 
+                              new_sequence)
         return new_sequence
 
     def _onehot_encode(self, sequence):
         integer_encoded = np.array([self.category_mapping[char] for char in sequence]).reshape(-1, 1)
-        onehot_encoder = OneHotEncoder(sparse=False, categories='auto', handle_unknown='ignore')
+        onehot_encoder = OneHotEncoder(sparse=False, categories='auto', 
+                                       handle_unknown='ignore')
         onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
 
         # Fill missing channels with zeros
@@ -215,13 +220,10 @@ class hot_dna:
 
 ### Processing large DNA alignments
 
-In order to handle large DNA alignments, a strategy that saves RAM had to be 
-applied. The basic idea was to read one sequence at a time, assign an index, one-hot encode 
-the DNA string and save it as a tensor. The results were then stored in a dictionary and saved as a `.pt` file
-with the index as filename (e.g. `0.pt`).
+A RAM-saving strategy was necessary for managing large DNA alignments. The fundamental approach involved processing a single sequence at a time, assigning it an index, and transforming the DNA string into a one-hot encoded tensor. These results were cataloged in a dictionary and preserved as a '.pt' file, named using the assigned index (for example, '0.pt'). An example of the contents of a `.pt` file is given below:
 
 ```{python, eval=FALSE}
-{'sequence_id': '0', 'sequence_tensor': tensor([[0., 0., 0., 0., 0., 1.],
+{'sequence_id': '3', 'sequence_tensor': tensor([[0., 0., 0., 0., 0., 1.],
         [0., 0., 0., 0., 0., 1.],
         [0., 0., 0., 0., 0., 1.],
         ...,
@@ -230,10 +232,21 @@ with the index as filename (e.g. `0.pt`).
         [0., 0., 0., 0., 0., 1.]])}
 ```
 
-The taxonomy information of the sequences were stored in a list and saved a a `pickle` file.
+The taxonomy information of the sequences were stored in a list and saved a a `pickle` file. The list consists
+of a dictionary with the correspoding index and the taxonomy labels:
 
 ```{python, eval=FALSE}
-def process_sequences(msa_file_path, alignment_length, sequence_path, full_taxonomy_labels, original_indices):
+{'sequence_id': '3', 'label': ['FW369114.1.1462', 'Bacteria', 
+'Proteobacteria', 'Alphaproteobacteria', 'Rhizobiales', 
+'Xanthobacteraceae', 'Bradyrhizobium', 'unidentified']}
+```
+
+The full dataset was created with the script `process_data.py`, where the main
+function is given below. The runtime of this operation was approximately six hours.
+
+```{python, eval=FALSE}
+def process_sequences(msa_file_path, alignment_length, sequence_path, 
+                      full_taxonomy_labels, original_indices):
     full_labels = []
 
     with open(msa_file_path) as handle:
@@ -242,17 +255,42 @@ def process_sequences(msa_file_path, alignment_length, sequence_path, full_taxon
                 continue
 
             if len(str(record.seq)[:alignment_length]) == alignment_length:
-                encoded_dna = hot_dna(str(record.seq)[:alignment_length], record.description)
+                encoded_dna = hot_dna(str(record.seq)[:alignment_length], 
+                                      record.description)
                 sequence_tensor = torch.tensor(encoded_dna.onehot).float()
 
                 original_index = original_indices.index(i)
 
-                sequence_id = f"{original_index}"  # Unique identifier for each sequence
-                torch.save({"sequence_id": sequence_id, "sequence_tensor": sequence_tensor}, f'{sequence_path}/{sequence_id}.pt')  # Save with sequence_id
-                full_labels.append({"sequence_id": sequence_id, "label": full_taxonomy_labels[original_index]})
+                sequence_id = f"{original_index}"
+                torch.save({"sequence_id": sequence_id, 
+                            "sequence_tensor": sequence_tensor}, 
+                            f'{sequence_path}/{sequence_id}.pt')  
+                full_labels.append({"sequence_id": sequence_id, 
+                                    "label": \
+                                    full_taxonomy_labels[original_index]})
 
     pickle.dump(full_labels, open(f'{sequence_path}/full_labels.pkl', 'wb'))
+
 ```
+
+### Data selection based on taxonomy
+
+In this repository, a special focus has been set to be able to dynamically set
+classification tasks at different taxonomic levels. A part of the analyses in
+this report were based on 20% of the sequences from Phylum Actinobacteria in order to classify them to genus level (see Figure \@ref(fig:actino)). Only classes that have more than 20 sequences per class were inlcuded. This resulted in a dataset of 92 classes
+with genus *Streptomyces* being the most prominent representative (n=4702 sequences) and genus *Timonella* having the least sequences (n=20). 
+
+```{r actino, echo = FALSE,out.width="100%", fig.cap="The size and the classes of the dataset if only 20 \\%  of the sequences from the Phylum Actinobacteria are included. Only classes with more than 200 sequences are shown."}
+
+knitr::include_graphics("data_engineering/dataset_statistics/Phylum_Actinobacteria_Genus_200_0.2.png")
+```
+
+The second dataset used in this study contains 80% of the Domain Bacteria, which corresponds to 80% of the whole alignment. The minimum number of samples per group was set to 8 or 10 and the classificaton level was species. This dataset resulted in 4079 classes.
+
+## Convolutional Classifier
+
+
+
 
 
 

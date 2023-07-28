@@ -81,6 +81,8 @@ Usage:
 python clean_labels.py split_dictionary --base_path /path/to/dict/file --dict_file full_labels.pkl
 ```
 
+This function outputs the files `full_labels_conform.pkl` and `full_labels_non_conform.pkl`.
+
 #### Retrieve sequence information based on index
 
 It may be useful to retrieve the sequence and taxonomy information given a certain
