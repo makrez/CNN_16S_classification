@@ -21,6 +21,11 @@ Test if GPU is available:
 singularity exec --nv --bind /data ../singularity_images/ml-16s_1.0.sif python ./check_gpu.py
 ```
 
+**IMPORTANT**
+
+It is recommended to use the `scratch` partition, since potentially
+thousands of files are loaded during training.
+
 ## Input Data
 
 The input data is a multiple-sequence alignment (msa) in `.fasta` format.
@@ -101,4 +106,21 @@ Full label: ['AY855839.1.1390', 'Bacteria', 'Proteobacteria', 'Alphaproteobacter
 Original FASTA header: AY855839.1.1390 Bacteria;Proteobacteria;Alphaproteobacteria;Rickettsiales;Mitochondria;Maytenus hookeri
 ```
 
+#### Create dataset statistics
 
+It is often useful and necessary to inspect the number of classes and the counts
+before training, which can be done with the script `create_data_statistics.py`.
+An example output can be found in `dataset_statistics/`.
+
+Usage:
+
+```
+python create_data_statistics.py --labels_file full_labels_conform.pkl \
+    --taxonomic_level Family \
+    --taxonomic_group Microbacteriaceae \
+    --classification_level Genus \
+    --minimum_samples 100 \
+    --fraction 1 \
+    --output_path dataset_statistics/ \
+    --make_plot=True
+```

@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 def filter_by_taxonomy(full_labels, taxonomic_level, taxonomic_group, 
                        classification_level, minimum_samples, fraction):
     taxonomic_levels = ['ncbi_identifier', 'Domain', 'Kingdom', 'Phylum', 'Order', 'Family', 'Genus', 'Species']
-    filter_words = ['uncultured', 'unidentified', 'metagenome', 'bacterium']  # Corrected filter words
+    filter_words = ['uncultured', 'unidentified', 'metagenome', 'bacterium']
 
     # Make sure provided taxonomic_level and classification_level are valid
     assert taxonomic_level in taxonomic_levels, f"Invalid taxonomic_level. Must be one of {taxonomic_levels}"
@@ -141,7 +141,6 @@ def plot_classification_histogram(classification_counts, save_path=None):
 
     # Display the plot
     plt.show()
-
 
 
 def main(labels_file, taxonomic_level, taxonomic_group, 

@@ -1,26 +1,6 @@
-import torch
-from torch.utils.data import Dataset
 import numpy as np
 import re
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
-
-# Define SequenceDataset
-class SequenceDataset(Dataset):
-    def __init__(self, sequence_paths, labels):
-        self.sequence_paths = sequence_paths
-        self.labels = labels
-
-    def __getitem__(self, index):
-        sequence = torch.load(self.sequence_paths[index])
-        label = self.labels[index]
-        return {
-            "sequence": sequence,
-            "label": label,
-        }
-
-    def __len__(self):
-        return len(self.sequence_paths)
-
+from sklearn.preprocessing import OneHotEncoder
 
 class hot_dna:
     ### Class for One Hot Encoding DNA sequences
