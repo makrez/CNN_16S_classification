@@ -1,0 +1,1 @@
+{"criterion": "CrossEntropyLoss()", "test_dataloader_length": 13194, "device": "cuda", "correct_preds": 7.0, "total_preds": 10.0, "accuracy": 0.699999988079071}

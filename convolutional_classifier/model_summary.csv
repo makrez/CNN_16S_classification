@@ -1,0 +1,5 @@
+Model Name,Total Parameters,Trainable Parameters,Non-trainable Parameters
+SmallModel,1752596,1752596,0
+ConvClassifier2,8403993,8403993,0
+ModelWithDropout,8403993,8403993,0
+LargerModel,27512368,27512368,0

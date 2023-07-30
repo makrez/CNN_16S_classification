@@ -1,7 +1,8 @@
 ---
 title: "Classification of aligned 16S DNA Sequences"
+subtitle: "Project work for CAS Advanced Machine Learning, Univesity of Bern"
 author: "Marco Kreuzer"
-date: "2023-07-26"
+date: "2023-07-30"
 output: 
   bookdown::pdf_document2: default
 ---
@@ -14,6 +15,7 @@ library(cowplot)
 library(knitr)
 ```
 
+\newpage
 # Introduction
 
 
@@ -335,24 +337,64 @@ The model was then switched to evaluation mode, and performance was assessed on 
 
 ## Results
 
-```{r}
+Each model has been trained for 30 epochs and the F1 score calculated. The results are displayed in Figure \@ref(fig:modelcomparisoncc). Overall, a lower batch size (32) outperformed batch sizes 64 and 128. The best results were achieved with the model `ConvClassifier2` and a learning rate of 0.0001 with an F1 score of 0.98.
+score was 0.98. Therefore, this model and settings were used for assessing the final performance with the test data. The results are dipslayed as a confusion
+matrix in Figure \@ref(fig:confusionmatrix). The F1 score was 0.99.
+ 
+```{r modelcomparisoncc, fig.cap = "Comparison of different models with different hyperparameters.", echo=F}
 dat <- read.csv("~/cluster/data/users/mkreuzer/CNN_16S_classification/convolutional_classifier/results/f1_scores_actinobacteria_genus.csv", header = F)
 names(dat) = c("classification", "f1")
 
-fields <- c("tax_group","classification_level","tmp", "min_seqs", 
+fields <- c("tax_group","classification_level","tmp", "min_seqs", "tmp5", "fraction",
             "model", "tmp2", "batch_size", "tmp3", "learning_rate",
             "tmp4", "number_of_epochs")
 
 dat %>% 
   separate(classification,into = fields, sep = "_") %>% 
   select(!contains("tmp")) %>% 
-  ggplot(aes(x=batch_size,y=learning_rate)) +
+  ggplot(aes(x=learning_rate,y=batch_size)) +
   geom_tile(aes(fill=f1)) +
-  facet_wrap(~model)
+  facet_wrap(~model) +
+  scale_fill_continuous("F1 Score") +
+  labs(title="Model evaluation",
+       y = "Batch Size",
+       x= "Learning Rate")
+```
+```{r trainingcurve, fig.cap = "Training curve of the best model ConvClassifier2" , echo=FALSE}
+
+include_graphics("convolutional_classifier/results/Actinobacteria_Genus_min_20_frac_0.2_ConvClassifier2_bs_32_lr_0.0001_ne_30/model_evaluation/train_validation_curves.png")
+
+```
+
+```{r confusionmatrix, fig.cap = "Confusion matrix of the best model.",out.width= "100%", echo=F}
+ include_graphics(c("convolutional_classifier/results/Actinobacteria_Genus_min_20_frac_0.2_ConvClassifier2_bs_32_lr_0.0001_ne_30/final_evaluation/confusion_matrix.png"))
 ```
 
 
 
+# Variational Autoenconder
+
+Variational Autoencoders (VAEs) are a powerful class of generative models with diverse applications. Their utility extends to the analysis of DNA sequences. Primarily, the focus within this scope is to delve into the exploration of the latent space that these VAEs provide. The main goal is to discern whether DNA sequences show a proclivity for clustering at specific taxonomic levels.
+
+## Model
+
+The model consists of three main components: an encoder, a decoder, and a reparameterization trick in the middle. It is primarily used for unsupervised learning of hidden representations and is able to generate new data that is similar to the training data.
+
+1. **Encoder**: The encoder is a deep Convolutional Neural Network (CNN) that reduces the dimensionality of the input data, here DNA sequences, and encodes it into a latent space. The encoder includes several Conv1d layers with ReLU activations, interspersed with MaxPool1d layers for down-sampling, and ends with linear layers. The layers are designed to progressively decrease the spatial dimensions while increasing the depth, thereby learning more complex representations.
+
+2. **Latent Space**: The output of the encoder is passed through two separate fully connected (linear) layers. One computes the mean (mu) and the other computes the log-variance (logvar) of the latent variables. These parameters are used to define a probability distribution of the latent variables.
+
+3. **Reparameterization**: This is a technique used to allow backpropagation through random nodes. It introduces a random variable so that during training, the model generates a new value in the latent space that maintains the distribution's randomness. This is performed in the reparameterize function, which calculates the standard deviation (std) from the logvar, generates a random tensor (eps), and returns a new sample from the latent distribution (mu + eps*std).
+
+4. **Decoder**: The decoder is another deep CNN, but in reverse order compared to the encoder. It maps the latent space back to the original input dimension. The decoder contains several ConvTranspose1d layers with ReLU activations for up-sampling, interspersed with Upsample layers to increase the spatial dimensions, and ends with a sigmoid activation function. The sigmoid function ensures the output is a probability distribution over the possible output values, which is suitable for a binary classification task such as predicting presence or absence of a particular feature in a DNA sequence.
+
+In the forward function, the model first applies the encoder to the input, then the reparameterization trick, and finally the decoder. The model returns the reconstructed input, as well as the mean and log-variance of the latent variables. These outputs were then used in a loss function to train the model: the reconstruction loss measures how well the model can reconstruct the input, and the KL divergence measures how much the latent variable distribution deviates from a prior (usually a standard normal distribution).
+
+## Trainig
+
+For the variational autoencoder, sequences which were member of a species that had at least 8 members were used for filtering and splitting the data into train, validation and test set.. This resulted in a data set of 227,835 sequences from 4079 species.
+
+The 
 
 
 

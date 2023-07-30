@@ -40,11 +40,12 @@ def train_network(n_epochs, model, optimizer, criterion, train_dataloader, valid
             train_loss += loss.item() * sequence_data.size(0)
 
             # Log the progress
-            curr_time = time.time()
-            elapsed_time = curr_time - epoch_start_time
-            processed_sequences = i * batch['sequence'].size(0)
-            percentage_complete = (processed_sequences / len(train_dataloader.dataset)) * 100
-            logger.info(f"Epoch {epoch}/{n_epochs} | Processed {processed_sequences}/{len(train_dataloader.dataset)} sequences ({percentage_complete:.2f}%) | Training Loss: {train_loss/processed_sequences:.6f} | Elapsed Time: {elapsed_time:.2f}s")
+            if i % 10 == 0:
+                curr_time = time.time()
+                elapsed_time = curr_time - epoch_start_time
+                processed_sequences = i * batch['sequence'].size(0)
+                percentage_complete = (processed_sequences / len(train_dataloader.dataset)) * 100
+                logger.info(f"Epoch {epoch}/{n_epochs} | Processed {processed_sequences}/{len(train_dataloader.dataset)} sequences ({percentage_complete:.2f}%) | Training Loss: {train_loss/processed_sequences:.6f} | Elapsed Time: {elapsed_time:.2f}s")
 
         train_loss /= len(train_dataloader.dataset)
         train_losses.append(train_loss)
@@ -96,4 +97,4 @@ def train_network(n_epochs, model, optimizer, criterion, train_dataloader, valid
     total_duration = time.time() - start_time
     logger.info(f"Total training time: {total_duration:.2f}s")
 
-    return train_losses, valid_losses, y_true, y_pred
+    return train_losses, valid_losses, y_true, y_pred, total_duration

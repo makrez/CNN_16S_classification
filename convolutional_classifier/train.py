@@ -79,7 +79,7 @@ results = []
 for params in grid:
     
     # Create a subdirectory for this set of parameters
-    directory = f"results/{taxonomic_group}_{classification_level}_min_{minimum_samples}_{params['model']}_bs_{params['batch_size']}_lr_{params['lr']}_ne_{params['n_epoch']}"
+    directory = f"results/{taxonomic_group}_{classification_level}_min_{minimum_samples}_frac_{fraction_of_sequences_to_use}_{params['model']}_bs_{params['batch_size']}_lr_{params['lr']}_ne_{params['n_epoch']}"
 
     # Check if the directory already exists
     if os.path.isfile(os.path.join(directory, 'training_finished.txt')):
@@ -151,7 +151,7 @@ for params in grid:
     logging.info(f"Starting training with lr={params['lr']}, n_epoch={params['n_epoch']}")
     print(f"Training with lr={params['lr']}, n_epoch={params['n_epoch']}")
 
-    train_losses, valid_losses, y_true, y_pred = train_network(params['n_epoch'], model, optimizer, criterion, train_dataloader, valid_dataloader, device, directory, logger)
+    train_losses, valid_losses, y_true, y_pred, total_duration = train_network(params['n_epoch'], model, optimizer, criterion, train_dataloader, valid_dataloader, device, directory, logger)
     # Save losses and predictions for later analysis
     np.save(os.path.join(model_evaluation_dir, 'train_losses.npy'), np.array(train_losses))
     np.save(os.path.join(model_evaluation_dir, 'valid_losses.npy'), np.array(valid_losses))
@@ -184,4 +184,4 @@ for params in grid:
                                            model_evaluation_dir)
     plot_and_report.print_f1_and_classification_report(y_true, y_pred, label_map, model_evaluation_dir)
     with open(os.path.join(directory, 'training_finished.txt'), 'w'):
-        pass
+        print(f"Total training time: {total_duration:.2f}s")

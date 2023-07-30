@@ -12,13 +12,13 @@ import torch.nn.functional as F
 
 # Set up paths and parameters
 data_folder = '/scratch/mk_cas/full_silva_dataset/sequences/'
-results_path = 'results/Actinobacteria_Genus_min_20_ConvClassifier2_bs_32_lr_0.001_ne_50'
-output_path = os.path.join(results_path, 'final_evaluation')
+results_path = 'results/Actinobacteria_Genus_min_20_frac_0.2_ConvClassifier2_bs_32_lr_0.0001_ne_30'
+output_path = os.path.join(results_path, 'final_evaluation')    
 model_path = os.path.join(results_path, 'final_model.pt')
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 alignment_length = 50000
-batch_size = 64
-num_classes = 94
+batch_size = 32
+num_classes = 95
 model = ConvClassifier2(input_length=alignment_length, num_classes=num_classes).to(device)
 
 # create output directory

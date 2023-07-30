@@ -1,0 +1,120 @@
+Classification Report:
+                           precision    recall  f1-score   support
+
+   Acidipropionibacterium       0.00      0.00      0.00         3
+             Acidothermus       0.00      0.00      0.00         4
+          Actinoallomurus       0.00      0.00      0.00         5
+           Actinocorallia       0.00      0.00      0.00         4
+             Actinomadura       0.71      0.93      0.81        27
+              Actinomyces       0.99      0.99      0.99       170
+             Actinoplanes       0.00      0.00      0.00        10
+          Actinopolyspora       1.00      0.67      0.80         3
+            Aeromicrobium       0.50      0.22      0.31         9
+               Agrococcus       0.33      0.18      0.24        11
+                Agromyces       0.70      0.93      0.80        15
+            Amycolatopsis       0.61      1.00      0.75        23
+          Arcanobacterium       1.00      0.80      0.89         5
+             Arthrobacter       0.74      0.83      0.78        98
+                   Asanoa       0.00      0.00      0.00         3
+          Bifidobacterium       0.95      0.99      0.97        82
+             Blastococcus       0.55      0.75      0.63         8
+          Brachybacterium       0.89      0.83      0.86        29
+           Brevibacterium       0.92      0.98      0.95        59
+      Candidatus Aquiluna       0.86      0.43      0.57        14
+     Candidatus Limnoluna       1.00      0.33      0.50         3
+  Candidatus Planktophila       0.00      0.00      0.00         4
+             Cellulomonas       0.58      0.61      0.59        18
+       Cellulosimicrobium       0.62      0.91      0.74        11
+              Citricoccus       0.33      0.20      0.25         5
+              Clavibacter       0.00      0.00      0.00         9
+          Corynebacterium       1.00      1.00      1.00      2049
+               Crossiella       0.88      0.95      0.91        22
+            Cryobacterium       0.00      0.00      0.00        11
+           Curtobacterium       0.68      0.98      0.80        42
+            Cutibacterium       1.00      1.00      1.00      1820
+        Dactylosporangium       0.00      0.00      0.00         5
+                Demequina       0.00      0.00      0.00         3
+              Dermabacter       1.00      0.56      0.71         9
+              Dermacoccus       1.00      1.00      1.00         5
+                  Dietzia       0.97      1.00      0.99        37
+                    F0332       0.90      0.90      0.90        10
+                  Frankia       0.50      0.25      0.33         4
+           Friedmanniella       0.75      0.60      0.67         5
+         Frigoribacterium       0.00      0.00      0.00         6
+              Gardnerella       0.00      0.00      0.00         4
+         Geodermatophilus       0.00      0.00      0.00         4
+                Georgenia       0.00      0.00      0.00         3
+          Glutamicibacter       0.81      0.94      0.87        32
+               Glycomyces       0.62      0.83      0.71         6
+                 Gordonia       1.00      0.88      0.93        48
+      Haloactinopolyspora       0.00      0.00      0.00         4
+             Isoptericola       0.00      0.00      0.00         5
+               Janibacter       0.79      0.94      0.86        33
+         Jatrophihabitans       0.50      0.20      0.29         5
+            Kitasatospora       0.00      0.00      0.00        15
+                  Kocuria       0.89      0.95      0.92        96
+                Kribbella       0.00      0.00      0.00         6
+               Kytococcus       0.50      0.33      0.40         3
+               Lawsonella       1.00      1.00      1.00       176
+            Lechevalieria       0.00      0.00      0.00         5
+                Leifsonia       0.25      0.10      0.14        10
+              Leucobacter       0.24      0.40      0.30        20
+               Longispora       0.00      0.00      0.00         3
+              Marmoricola       0.00      0.00      0.00         7
+           Microbacterium       0.85      0.98      0.91       182
+             Microbispora       1.00      0.33      0.50         6
+              Micrococcus       0.91      0.97      0.93        89
+             Microlunatus       0.50      0.40      0.44         5
+           Micromonospora       0.66      0.96      0.79        84
+            Modestobacter       0.00      0.00      0.00         6
+            Mycobacterium       1.00      1.00      1.00       389
+              Nakamurella       0.00      0.00      0.00         4
+            Nesterenkonia       0.75      0.43      0.55         7
+                 Nocardia       0.86      0.95      0.91        66
+             Nocardioides       0.78      1.00      0.88        57
+             Nocardiopsis       0.87      1.00      0.93        40
+               Nonomuraea       0.86      0.91      0.89        47
+       Ornithinimicrobium       0.00      0.00      0.00         4
+         Paenarthrobacter       0.58      0.32      0.41        22
+     Paeniglutamicibacter       0.00      0.00      0.00         9
+     Parafrigoribacterium       0.00      0.00      0.00         3
+             Plantibacter       0.00      0.00      0.00         4
+        Promicromonospora       0.00      0.00      0.00         5
+        Propionibacterium       0.50      0.86      0.63         7
+          Propioniciclava       1.00      0.25      0.40         4
+        Pseudarthrobacter       0.86      0.85      0.85        65
+        Pseudoclavibacter       0.43      0.38      0.40         8
+           Pseudonocardia       0.66      0.97      0.78        32
+  Pseudopropionibacterium       0.86      0.55      0.67        11
+            Quadrisphaera       0.00      0.00      0.00         3
+            Rathayibacter       0.00      0.00      0.00         3
+              Rhodococcus       0.96      0.97      0.96       119
+                   Rothia       0.98      0.97      0.98       194
+        Saccharomonospora       1.00      0.20      0.33        10
+        Saccharopolyspora       0.00      0.00      0.00         8
+            Saccharothrix       0.00      0.00      0.00         4
+          Salinibacterium       0.00      0.00      0.00         4
+              Salinispora       0.00      0.00      0.00        13
+Sanguibacter-Flavimobilis       0.00      0.00      0.00         5
+        Streptacidiphilus       0.00      0.00      0.00         3
+             Streptomyces       0.97      1.00      0.98       678
+        Streptosporangium       0.82      0.93      0.87        45
+              Terrabacter       0.00      0.00      0.00         3
+            Tessaracoccus       0.00      0.00      0.00         9
+             Tetrasphaera       0.82      0.69      0.75        13
+             Thermobifida       1.00      0.75      0.86         4
+              Trueperella       0.86      0.86      0.86         7
+             Tsukamurella       1.00      0.62      0.77         8
+                Turicella       1.00      0.80      0.89        15
+              Varibaculum       0.86      1.00      0.92         6
+           Verrucosispora       0.00      0.00      0.00         9
+               Williamsia       0.80      0.80      0.80         5
+               hgcI clade       0.83      0.97      0.90        40
+               uncultured       0.33      0.55      0.41        53
+
+                 accuracy                           0.94      7562
+                macro avg       0.50      0.47      0.47      7562
+             weighted avg       0.92      0.94      0.92      7562
+
+F1 Score:
+0.4665861448239595
