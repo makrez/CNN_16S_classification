@@ -1,0 +1,93 @@
+2023-07-31 12:18:36 INFO     Starting training with lr=0.001, n_epoch=30
+2023-07-31 12:18:47 INFO     Epoch 1/30 | Processed 320/564 sequences (56.74%) | Training Loss: 4.532105 | Elapsed Time: 10.41s
+2023-07-31 12:18:51 INFO     Accuracy: 0.0400
+2023-07-31 12:18:51 INFO     Epoch: 1 	Training Loss: 3.972348 	valid Loss: 3.324572 	Epoch Time: 14.69s 	Total Time: 14.69s
+2023-07-31 12:18:52 INFO     Epoch 2/30 | Processed 320/564 sequences (56.74%) | Training Loss: 3.241726 | Elapsed Time: 0.71s
+2023-07-31 12:18:52 INFO     Accuracy: 0.0800
+2023-07-31 12:18:52 INFO     Epoch: 2 	Training Loss: 3.211458 	valid Loss: 3.170243 	Epoch Time: 1.46s 	Total Time: 16.16s
+2023-07-31 12:18:53 INFO     Epoch 3/30 | Processed 320/564 sequences (56.74%) | Training Loss: 3.176925 | Elapsed Time: 0.68s
+2023-07-31 12:18:54 INFO     Accuracy: 0.0800
+2023-07-31 12:18:54 INFO     Epoch: 3 	Training Loss: 3.145070 	valid Loss: 3.100562 	Epoch Time: 1.43s 	Total Time: 17.59s
+2023-07-31 12:18:54 INFO     Epoch 4/30 | Processed 320/564 sequences (56.74%) | Training Loss: 3.109519 | Elapsed Time: 0.68s
+2023-07-31 12:18:55 INFO     Accuracy: 0.0800
+2023-07-31 12:18:55 INFO     Epoch: 4 	Training Loss: 3.101194 	valid Loss: 3.057523 	Epoch Time: 1.64s 	Total Time: 19.23s
+2023-07-31 12:18:57 INFO     Epoch 5/30 | Processed 320/564 sequences (56.74%) | Training Loss: 3.104482 | Elapsed Time: 1.54s
+2023-07-31 12:18:58 INFO     Accuracy: 0.2400
+2023-07-31 12:18:58 INFO     Epoch: 5 	Training Loss: 3.055638 	valid Loss: 2.974697 	Epoch Time: 2.29s 	Total Time: 21.52s
+2023-07-31 12:18:58 INFO     Epoch 6/30 | Processed 320/564 sequences (56.74%) | Training Loss: 2.934545 | Elapsed Time: 0.68s
+2023-07-31 12:18:59 INFO     Accuracy: 0.2800
+2023-07-31 12:18:59 INFO     Epoch: 6 	Training Loss: 2.864405 	valid Loss: 2.588838 	Epoch Time: 1.42s 	Total Time: 22.94s
+2023-07-31 12:19:00 INFO     Epoch 7/30 | Processed 320/564 sequences (56.74%) | Training Loss: 2.451266 | Elapsed Time: 0.68s
+2023-07-31 12:19:01 INFO     Accuracy: 0.4000
+2023-07-31 12:19:01 INFO     Epoch: 7 	Training Loss: 2.313003 	valid Loss: 1.856510 	Epoch Time: 1.42s 	Total Time: 24.36s
+2023-07-31 12:19:01 INFO     Epoch 8/30 | Processed 320/564 sequences (56.74%) | Training Loss: 1.796587 | Elapsed Time: 0.68s
+2023-07-31 12:19:02 INFO     Accuracy: 0.5200
+2023-07-31 12:19:02 INFO     Epoch: 8 	Training Loss: 1.687612 	valid Loss: 1.335424 	Epoch Time: 1.43s 	Total Time: 25.79s
+2023-07-31 12:19:03 INFO     Epoch 9/30 | Processed 320/564 sequences (56.74%) | Training Loss: 1.265379 | Elapsed Time: 0.68s
+2023-07-31 12:19:03 INFO     Accuracy: 0.6400
+2023-07-31 12:19:03 INFO     Epoch: 9 	Training Loss: 1.200870 	valid Loss: 0.976282 	Epoch Time: 1.43s 	Total Time: 27.22s
+2023-07-31 12:19:04 INFO     Epoch 10/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.902979 | Elapsed Time: 0.69s
+2023-07-31 12:19:05 INFO     Accuracy: 0.8000
+2023-07-31 12:19:05 INFO     Epoch: 10 	Training Loss: 0.908491 	valid Loss: 0.828261 	Epoch Time: 1.43s 	Total Time: 28.65s
+2023-07-31 12:19:05 INFO     Epoch 11/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.728451 | Elapsed Time: 0.68s
+2023-07-31 12:19:06 INFO     Accuracy: 0.6400
+2023-07-31 12:19:06 INFO     Epoch: 11 	Training Loss: 0.728970 	valid Loss: 0.734500 	Epoch Time: 1.42s 	Total Time: 30.07s
+2023-07-31 12:19:07 INFO     Epoch 12/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.622994 | Elapsed Time: 0.69s
+2023-07-31 12:19:08 INFO     Accuracy: 0.6400
+2023-07-31 12:19:08 INFO     Epoch: 12 	Training Loss: 0.592762 	valid Loss: 0.574927 	Epoch Time: 1.44s 	Total Time: 31.52s
+2023-07-31 12:19:08 INFO     Epoch 13/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.482389 | Elapsed Time: 0.68s
+2023-07-31 12:19:09 INFO     Accuracy: 0.6800
+2023-07-31 12:19:09 INFO     Epoch: 13 	Training Loss: 0.462454 	valid Loss: 0.491322 	Epoch Time: 1.43s 	Total Time: 32.95s
+2023-07-31 12:19:10 INFO     Epoch 14/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.429647 | Elapsed Time: 0.68s
+2023-07-31 12:19:11 INFO     Accuracy: 0.7200
+2023-07-31 12:19:11 INFO     Epoch: 14 	Training Loss: 0.444622 	valid Loss: 0.462089 	Epoch Time: 1.42s 	Total Time: 34.37s
+2023-07-31 12:19:11 INFO     Epoch 15/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.398173 | Elapsed Time: 0.68s
+2023-07-31 12:19:12 INFO     Accuracy: 0.8400
+2023-07-31 12:19:12 INFO     Epoch: 15 	Training Loss: 0.375803 	valid Loss: 0.453113 	Epoch Time: 1.68s 	Total Time: 36.05s
+2023-07-31 12:19:13 INFO     Epoch 16/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.411016 | Elapsed Time: 0.69s
+2023-07-31 12:19:14 INFO     Accuracy: 0.8000
+2023-07-31 12:19:14 INFO     Epoch: 16 	Training Loss: 0.380788 	valid Loss: 0.458225 	Epoch Time: 1.43s 	Total Time: 37.48s
+2023-07-31 12:19:14 INFO     Epoch 17/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.305035 | Elapsed Time: 0.68s
+2023-07-31 12:19:15 INFO     Accuracy: 0.8400
+2023-07-31 12:19:15 INFO     Epoch: 17 	Training Loss: 0.285722 	valid Loss: 0.489255 	Epoch Time: 1.43s 	Total Time: 38.91s
+2023-07-31 12:19:16 INFO     Epoch 18/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.277572 | Elapsed Time: 0.69s
+2023-07-31 12:19:16 INFO     Accuracy: 0.8800
+2023-07-31 12:19:16 INFO     Epoch: 18 	Training Loss: 0.292725 	valid Loss: 0.506321 	Epoch Time: 1.43s 	Total Time: 40.34s
+2023-07-31 12:19:17 INFO     Epoch 19/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.385867 | Elapsed Time: 0.69s
+2023-07-31 12:19:18 INFO     Accuracy: 0.8800
+2023-07-31 12:19:18 INFO     Epoch: 19 	Training Loss: 0.374140 	valid Loss: 0.474903 	Epoch Time: 1.43s 	Total Time: 41.77s
+2023-07-31 12:19:19 INFO     Epoch 20/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.337335 | Elapsed Time: 0.70s
+2023-07-31 12:19:19 INFO     Accuracy: 0.8400
+2023-07-31 12:19:19 INFO     Epoch: 20 	Training Loss: 0.329152 	valid Loss: 0.456415 	Epoch Time: 1.44s 	Total Time: 43.21s
+2023-07-31 12:19:20 INFO     Epoch 21/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.268311 | Elapsed Time: 0.68s
+2023-07-31 12:19:21 INFO     Accuracy: 0.8800
+2023-07-31 12:19:21 INFO     Epoch: 21 	Training Loss: 0.267010 	valid Loss: 0.359282 	Epoch Time: 1.42s 	Total Time: 44.63s
+2023-07-31 12:19:21 INFO     Epoch 22/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.228945 | Elapsed Time: 0.68s
+2023-07-31 12:19:22 INFO     Accuracy: 0.8800
+2023-07-31 12:19:22 INFO     Epoch: 22 	Training Loss: 0.249475 	valid Loss: 0.408666 	Epoch Time: 1.43s 	Total Time: 46.06s
+2023-07-31 12:19:23 INFO     Epoch 23/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.227537 | Elapsed Time: 0.69s
+2023-07-31 12:19:24 INFO     Accuracy: 0.8800
+2023-07-31 12:19:24 INFO     Epoch: 23 	Training Loss: 0.241419 	valid Loss: 0.411400 	Epoch Time: 1.43s 	Total Time: 47.49s
+2023-07-31 12:19:24 INFO     Epoch 24/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.343472 | Elapsed Time: 0.68s
+2023-07-31 12:19:25 INFO     Accuracy: 0.8800
+2023-07-31 12:19:25 INFO     Epoch: 24 	Training Loss: 0.313657 	valid Loss: 0.396488 	Epoch Time: 1.43s 	Total Time: 48.92s
+2023-07-31 12:19:26 INFO     Epoch 25/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.245757 | Elapsed Time: 0.68s
+2023-07-31 12:19:27 INFO     Accuracy: 0.8800
+2023-07-31 12:19:27 INFO     Epoch: 25 	Training Loss: 0.252560 	valid Loss: 0.409083 	Epoch Time: 1.43s 	Total Time: 50.35s
+2023-07-31 12:19:27 INFO     Epoch 26/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.246613 | Elapsed Time: 0.68s
+2023-07-31 12:19:28 INFO     Accuracy: 0.7600
+2023-07-31 12:19:28 INFO     Epoch: 26 	Training Loss: 0.233642 	valid Loss: 0.440551 	Epoch Time: 1.42s 	Total Time: 51.77s
+2023-07-31 12:19:29 INFO     Epoch 27/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.206181 | Elapsed Time: 0.68s
+2023-07-31 12:19:29 INFO     Accuracy: 0.8800
+2023-07-31 12:19:29 INFO     Epoch: 27 	Training Loss: 0.242711 	valid Loss: 0.377457 	Epoch Time: 1.43s 	Total Time: 53.20s
+2023-07-31 12:19:30 INFO     Epoch 28/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.234153 | Elapsed Time: 0.68s
+2023-07-31 12:19:31 INFO     Accuracy: 0.8400
+2023-07-31 12:19:31 INFO     Epoch: 28 	Training Loss: 0.257610 	valid Loss: 0.393828 	Epoch Time: 1.44s 	Total Time: 54.64s
+2023-07-31 12:19:31 INFO     Epoch 29/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.227429 | Elapsed Time: 0.69s
+2023-07-31 12:19:32 INFO     Accuracy: 0.8800
+2023-07-31 12:19:32 INFO     Epoch: 29 	Training Loss: 0.243958 	valid Loss: 0.384956 	Epoch Time: 1.45s 	Total Time: 56.08s
+2023-07-31 12:19:33 INFO     Epoch 30/30 | Processed 320/564 sequences (56.74%) | Training Loss: 0.205789 | Elapsed Time: 0.69s
+2023-07-31 12:19:34 INFO     Accuracy: 0.8400
+2023-07-31 12:19:34 INFO     Epoch: 30 	Training Loss: 0.222374 	valid Loss: 0.474074 	Epoch Time: 1.44s 	Total Time: 57.52s
+2023-07-31 12:19:34 INFO     Total training time: 57.78s
+2023-07-31 12:19:34 INFO     lr=0.001, n_epoch=30, train_loss=0.22237352477320543, valid_loss=0.47407394499818156

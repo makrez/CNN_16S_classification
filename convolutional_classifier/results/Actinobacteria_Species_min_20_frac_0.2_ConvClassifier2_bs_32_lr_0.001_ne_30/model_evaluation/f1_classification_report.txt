@@ -1,0 +1,34 @@
+Classification Report:
+                                 precision    recall  f1-score   support
+
+      Clavibacter michiganensis       1.00      1.00      1.00         5
+     Glutamicibacter nicotianae       1.00      1.00      1.00         4
+              Kocuria palustris       1.00      1.00      1.00         5
+                  Kocuria rosea       1.00      1.00      1.00         4
+        Lysinimonas sp. LM-2018       1.00      1.00      1.00         4
+             Micrococcus luteus       0.78      1.00      0.88        14
+        Micrococcus yunnanensis       0.00      0.00      0.00         4
+       Nocardia cyriacigeorgica       1.00      1.00      1.00         6
+             Nocardia farcinica       1.00      1.00      1.00         3
+              Nocardiopsis alba       0.75      1.00      0.86         3
+      Nocardiopsis dassonvillei       1.00      0.67      0.80         3
+      Pseudarthrobacter oxydans       0.64      1.00      0.78         7
+Pseudarthrobacter siccitolerans       0.00      0.00      0.00         4
+       Rhodococcus erythropolis       0.89      1.00      0.94         8
+             Rhodococcus hoagii       1.00      0.75      0.86         4
+      Streptomyces albidoflavus       0.55      1.00      0.71         6
+          Streptomyces avidinii       1.00      1.00      1.00         3
+           Streptomyces griseus       0.62      0.89      0.73         9
+       Streptomyces microflavus       1.00      0.20      0.33         5
+         Streptomyces mutabilis       1.00      0.67      0.80         3
+            Streptomyces rochei       1.00      0.25      0.40         4
+           Streptomyces scabiei       1.00      0.80      0.89         5
+        Streptomyces variabilis       1.00      1.00      1.00         4
+           Trueperella pyogenes       1.00      1.00      1.00         4
+
+                       accuracy                           0.83       121
+                      macro avg       0.84      0.80      0.79       121
+                   weighted avg       0.82      0.83      0.80       121
+
+F1 Score:
+0.7901507193786607

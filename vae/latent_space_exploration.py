@@ -8,6 +8,7 @@ from data_processing_functions import SequenceDataset
 from latent_space_exploration_functions import encode_data, \
     inspect_encoded_data, perform_tsne, select_indices_by_taxonomy
 import random
+import csv
 
 # Set up paths and parameters
 data_folder = '/scratch/mk_cas/full_silva_dataset/sequences/'
@@ -18,14 +19,16 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 alignment_length = 50000
 batch_size = 32
 subset_fraction = 0.1 #Fraction of test data to be used
-taxonomic_level = 'Phylum'
-taxon_value = 'Actinobacteria'
+taxonomic_level = 'Domain'
+taxon_value = 'Bacteria'
 
 # create output directory
 os.makedirs(output_path, exist_ok=True)
 # Set output_filenames
 tsne_output = 'tsne_plot_' + taxonomic_level + 'Is' + taxon_value + \
     'fraction_' + str(subset_fraction).replace('.','_') + '_'
+csv_output = 'tsne_data_' + taxonomic_level + 'Is' + taxon_value + \
+    'fraction_' + str(subset_fraction).replace('.','_') + '.csv'
 
 # Load labels and indices
 with open(os.path.join(data_folder, 'full_labels_conform.pkl'), 'rb') as f:
@@ -55,6 +58,15 @@ full_labels_dict = {item['sequence_id']: item['label'] for item in full_labels}
 # Get labels for the test indices
 test_labels = [full_labels_dict.get(str(index['sequence_id']), None) for index in test_indices]
 
+# Save the labels.
+column_names = ['ncbi_identifier', 'Domain', 'Kingdom', 'Phylum', 'Order', 'Family', 'Genus', 'Species']
+
+# Open your file
+with open(os.path.join(output_path, csv_output), 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(column_names)
+    writer.writerows(test_labels)
+
 # Load the test dataset
 test_dataset = SequenceDataset(data_folder, test_indices)
 test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
@@ -68,9 +80,9 @@ model.load_state_dict(new_state_dict)
 
 # Encode the test data into the latent space
 latent_space_samples = encode_data(model, test_dataloader, device)
-inspect_encoded_data(latent_space_samples)
+#inspect_encoded_data(latent_space_samples) # for debugging purposes only
 
-# Perform t-SNE and PCA on the encoded data
+#Perform t-SNE and PCA on the encoded data
 perform_tsne(latent_space_samples, test_labels, 'Domain', 
              os.path.join(output_path, tsne_output))
 perform_tsne(latent_space_samples, test_labels, 'Kingdom', 
