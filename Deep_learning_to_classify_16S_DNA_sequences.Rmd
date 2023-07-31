@@ -369,8 +369,6 @@ include_graphics(file.path("convolutional_classifier/results/",best_model,"model
 include_graphics(file.path("convolutional_classifier/results/",best_model,"model_evaluation/confusion_matrix.png"))
 ```
 
-
-
 # Variational Autoenconder
 
 Variational Autoencoders (VAEs) are a powerful class of generative models with diverse applications. Their utility extends to the analysis of DNA sequences. Primarily, the focus within this scope is to delve into the exploration of the latent space that these VAEs provide. The main goal is to discern whether DNA sequences show a proclivity for clustering at specific taxonomic levels.
@@ -391,9 +389,21 @@ In the forward function, the model first applies the encoder to the input, then 
 
 ## Trainig
 
-For the variational autoencoder, sequences which were member of a species that had at least 8 members were used for filtering and splitting the data into train, validation and test set.. This resulted in a data set of 227,835 sequences from 4079 species.
+For the variational autoencoder, sequences which were member of a species that had at least 8 members were used for filtering and splitting the data into train, validation and test set. This resulted in a data set of 227,835 sequences from 4079 species.
 
-The 
+During the training, the loss is calculated as the sum of the reconstruction loss (binary cross-entropy between reconstructions and original sequences) and the Kullback-Leibler divergence (KLD) for latent variable parameters. The trainig was run for
+200 epochs on 2 GPUs for a total training time of ~180 hours.
+
+## Results
+
+The training curve is shown in Figure \@ref(fig:trainigvae).
+
+```{r trainigvae, fig.cap = "Confusion matrix of the best model.",out.width= "100%", echo=F}
+best_model <- "Bacteria_Species_min_8_ConvVAE_bs_32_lr_0.001_ne_200"
+include_graphics(file.path("vae/results/",best_model,"model_evaluation/train_validation_curves.png"))
+```
+
+
 
 
 

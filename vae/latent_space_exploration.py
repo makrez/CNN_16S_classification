@@ -71,10 +71,16 @@ latent_space_samples = encode_data(model, test_dataloader, device)
 inspect_encoded_data(latent_space_samples)
 
 # Perform t-SNE and PCA on the encoded data
-perform_tsne(latent_space_samples, test_labels, 'Domain', os.path.join(output_path, tsne_output))
-perform_tsne(latent_space_samples, test_labels, 'Kingdom', os.path.join(output_path, tsne_output))
-perform_tsne(latent_space_samples, test_labels, 'Phylum', os.path.join(output_path, tsne_output))
+perform_tsne(latent_space_samples, test_labels, 'Domain', 
+             os.path.join(output_path, tsne_output))
+perform_tsne(latent_space_samples, test_labels, 'Kingdom', 
+             os.path.join(output_path, tsne_output))
+perform_tsne(latent_space_samples, test_labels, 'Phylum', 
+             os.path.join(output_path, tsne_output))
 perform_tsne(latent_space_samples, test_labels, 'Order', os.path.join(output_path, tsne_output))
-perform_tsne(latent_space_samples, test_labels, 'Family', os.path.join(output_path, tsne_output))
-perform_tsne(latent_space_samples, test_labels, 'Genus', os.path.join(output_path, tsne_output))
-perform_tsne(latent_space_samples, test_labels, 'Species', os.path.join(output_path, tsne_output))
+perform_tsne(latent_space_samples, test_labels, 'Family', 
+             os.path.join(output_path, tsne_output), legend=False)
+perform_tsne(latent_space_samples, test_labels, 'Genus', 
+             os.path.join(output_path, tsne_output), legend=False)
+perform_tsne(latent_space_samples, test_labels, 'Species', 
+             os.path.join(output_path, tsne_output), legend=False)

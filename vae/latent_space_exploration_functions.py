@@ -35,19 +35,8 @@ def inspect_encoded_data(encoded_data):
     print(f"Mean of each latent dimension:\n{means}")
     print(f"Variance of each latent dimension:\n{variances}")
 
-# def perform_tsne(latent_space_samples, save_path):
-#     tsne = TSNE(n_components=2, random_state=0)
-#     latent_space_tsne = tsne.fit_transform(latent_space_samples)
-
-#     plt.scatter(latent_space_tsne[:, 0], latent_space_tsne[:, 1])
-#     plt.xlabel('Dimension 1')
-#     plt.ylabel('Dimension 2')
-#     plt.title('t-SNE visualization of latent space')
-
-#     plt.savefig(save_path)
-#     plt.close()
-
-def perform_tsne(latent_space_samples, labels, taxonomic_level, save_path):
+def perform_tsne(latent_space_samples, labels, taxonomic_level, save_path,
+                 legend=True):
     # Define a mapping of taxonomic levels to their indices
     taxonomic_levels = ['ncbi_identifier', 'Domain', 'Kingdom', 'Phylum', 'Order', 'Family', 'Genus', 'Species']
     taxonomic_level_index = taxonomic_levels.index(taxonomic_level)
@@ -76,7 +65,8 @@ def perform_tsne(latent_space_samples, labels, taxonomic_level, save_path):
     plt.xlabel('Dimension 1')
     plt.ylabel('Dimension 2')
     plt.title('t-SNE visualization of latent space')
-    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    if legend:
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 
     # Save the figure
     plt.savefig(save_path, bbox_inches='tight')
