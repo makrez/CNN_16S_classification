@@ -361,13 +361,12 @@ dat %>%
        x= "Learning Rate")
 ```
 ```{r trainingcurve, fig.cap = "Training curve of the best model ConvClassifier2" , echo=FALSE}
-
-include_graphics("convolutional_classifier/results/Actinobacteria_Genus_min_20_frac_0.2_ConvClassifier2_bs_32_lr_0.0001_ne_30/model_evaluation/train_validation_curves.png")
-
+best_model <- "Actinobacteria_Genus_min_20_frac_0.2_ConvClassifier2_bs_32_lr_0.001_ne_30"
+include_graphics(file.path("convolutional_classifier/results/",best_model,"model_evaluation/train_validation_curves.png"))
 ```
 
 ```{r confusionmatrix, fig.cap = "Confusion matrix of the best model.",out.width= "100%", echo=F}
- include_graphics(c("convolutional_classifier/results/Actinobacteria_Genus_min_20_frac_0.2_ConvClassifier2_bs_32_lr_0.0001_ne_30/final_evaluation/confusion_matrix.png"))
+include_graphics(file.path("convolutional_classifier/results/",best_model,"model_evaluation/confusion_matrix.png"))
 ```
 
 
