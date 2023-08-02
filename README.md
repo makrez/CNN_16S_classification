@@ -1,10 +1,4 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
-# Convolutional Neural Networds for the lassification of 16S rRNA sequences
+# Convolutional Neural Networds for the classification of 16S rRNA sequences
 
 ## Dependencies
 
